@@ -6,14 +6,21 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product){
+        product.setProductId(UUID.randomUUID().toString());
         productData.add(product);
         return product;
+    }
+
+    public void delete(String productId) {
+        // Hapus produk yang ID-nya sama dengan parameter
+        productData.removeIf(p -> p.getProductId().equals(productId));
     }
 
     public Iterator<Product> findAll(){
