@@ -18,6 +18,23 @@ public class ProductRepository {
         return product;
     }
 
+    public Product findById(String productId){
+        for (Product p : productData) {
+            if (p.getProductId().equals(productId)) return p;
+        }
+        return null;
+    }
+
+    public Product edit(Product product) {
+        Product newProd = findById(product.getProductId());
+        if(newProd != null){
+            newProd.setProductName(product.getProductName());
+            newProd.setProductQuantity(product.getProductQuantity());
+        }
+
+        return newProd;
+    }
+
     public void delete(String productId) {
         // Hapus produk yang ID-nya sama dengan parameter
         productData.removeIf(p -> p.getProductId().equals(productId));
